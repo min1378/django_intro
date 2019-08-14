@@ -24,5 +24,8 @@ urlpatterns = [
     path('index/', views.index),
     path('admin/', admin.site.urls),
     path('introduce/', views.introduce),
-    path('dinner/', views.dinner),
+    path('dinner/<str:name>', views.dinner),
+    path('image/', views.image),
+    path('greeting/<str:name>', views.greeting),
+    path('times/<int:num1>:<int:num2>', views.times)
 ]
