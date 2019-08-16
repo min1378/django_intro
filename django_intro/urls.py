@@ -33,4 +33,8 @@ urlpatterns = [
     path('student/<str:name>:<int:age>', views.student),
     path('isbirthday/', views.isbirthday),
     path('lotto/', views.lotto),
+    path('search/', views.search),
+    path('result/', views.result),
+    path('lotto_pick/', views.lotto_pick),
+    path('lotto_result/', views.lotto_result),
 ]

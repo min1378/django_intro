@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from datetime import datetime
 import random
+import requests
 # Create your views here.
 def index(request): #첫번째 인자는 반드시 request => 사용자가 보내는 요청에 대한 정보
     return render(request, 'index.html') #render의 첫번째 인자도 반드시 request
@@ -100,3 +101,64 @@ def lotto(request):
 
     }
     return render(request, 'lotto.html', context)
+
+
+def search(request):
+    return render(request, 'search.html')
+
+def result(request):
+    query = request.GET.get('query')
+    category = request.GET.get('category')
+    context = {
+        'query': query,
+        'category': category,
+
+    }
+    return render(request, 'result.html', context)
+
+
+def lotto_pick(request):
+    return render(request, 'lotto_pick.html')
+
+
+def lotto_result(request):
+    result = ''
+    count = 0
+    lotto_info = requests.get('https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=870').json()
+    real_lotto =[]
+    for i in range(1,7) :
+        real_lotto.append(int(lotto_info[f'drwtNo{i}']))
+    temp = request.GET.get('my_lotto').split()
+    #my_lotto = [int(number) for number in temp.split()]
+    my_lotto = list(map(int, temp))
+    my_lotto = sorted(my_lotto)
+    for i in my_lotto :
+        for j in real_lotto:
+            if i == j:
+                count +=1
+                break
+    
+    if count == 6 :
+        result = '당첨'
+    
+    elif count == 5 :
+        result = '3등'
+    
+    elif count == 4 :
+        result = '4등'
+    
+    elif count == 3 :
+        result = '3등'
+    
+    else : 
+        result = '꽝'
+
+    context = {
+        'my_lotto' : my_lotto,
+        'real_lotto' : real_lotto,
+        'count' : count,
+        'result' : result,
+        'lotto_info' : lotto_info,
+
+    }
+    return render(request, 'lotto_result.html', context)
