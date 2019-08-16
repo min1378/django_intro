@@ -37,4 +37,5 @@ urlpatterns = [
     path('result/', views.result),
     path('lotto_pick/', views.lotto_pick),
     path('lotto_result/', views.lotto_result),
+    path('static_example/', views.static_example),
 ]
