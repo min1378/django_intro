@@ -1,5 +1,6 @@
 #pages/views.py
 from django.shortcuts import render
+from datetime import datetime
 import random
 # Create your views here.
 def index(request): #첫번째 인자는 반드시 request => 사용자가 보내는 요청에 대한 정보
@@ -45,3 +46,57 @@ def times(request, num1, num2):
         'result' : result
     }
     return render(request, 'times.html', context)
+
+
+def template_language(request):
+    menus = ['짜장면', '짬뽕', '양장피', '탕수육']
+    my_sentence = 'Life is short, you need python'
+    messages = ['apple', 'mango', 'cucumber', 'banana']
+    datetimenow = datetime.now()
+    empty_list = []
+    context = {
+        'menus' : menus,
+        'my_sentence' : my_sentence,
+        'messages': messages,
+        'empty_list' : empty_list,
+        'datetimenow' : datetimenow,
+    }
+    return render(request,'template_language.html', context)
+
+
+def info(request):
+
+    return render(request, 'info.html')
+
+
+
+def student(request, name, age):
+    context = {
+        'name' : name,
+        'age' : age,
+    }
+    return render(request, 'student.html', context)
+
+def isbirthday(request):
+
+    return render(request, 'isbirthday.html')
+
+def lotto(request):
+    real_lotto = [21, 25, 30, 32, 40, 42] #870회차 로또
+    lottos = []
+    result = '응 아니야!'
+    number = list(range(1,46))
+    while len(lottos) < 6:
+        num = random.choice(number)
+        if not num in lottos:
+            lottos.append(num)
+    lottos = sorted(lottos)
+    if lottos == real_lotto :
+        result = '당첨!!!!!!!!!!!!!!!!!!!!'
+    context = {
+        'lottos' : lottos,
+        'real_lotto' : real_lotto,
+        'result' : result
+
+    }
+    return render(request, 'lotto.html', context)

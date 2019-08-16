@@ -27,5 +27,10 @@ urlpatterns = [
     path('dinner/<str:name>', views.dinner),
     path('image/', views.image),
     path('greeting/<str:name>', views.greeting),
-    path('times/<int:num1>:<int:num2>', views.times)
+    path('times/<int:num1>:<int:num2>', views.times),
+    path('template_language/', views.template_language),
+    path('info/', views.info),
+    path('student/<str:name>:<int:age>', views.student),
+    path('isbirthday/', views.isbirthday),
+    path('lotto/', views.lotto),
 ]

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Template laguage</title>
+</head>
+<body style="height: 1000">
+  <h1>Template Language</h1>
+  <hr>
+
+  <h2>1. 반복문</h2>
+  {% for menu in menus %}
+  <p>{{ menu }}</p>
+  {% endfor %}
+  <hr>
+  {% comment %} 
+  {{forloop}} DTL에서 for문 안에서 자동으로 생기는 객체
+  {% endcomment %}
+
+  {% for menu in menus %}
+  <p> {{ forloop.counter }}. {{menu}}</p>
+  {% endfor %}
+
+  <hr>
+
+  {% for user in empty_list %}
+  <p> {{ user }} </p>
+  {% empty %}
+  <p> 현재 가입한 유저가 없습니다. </p>
+  {% endfor %}
+  <hr>
+
+
+  <h2>2. 조건문</h2>
+  {% if '짜장면' in menus %}
+  <p>짜장면엔 고춧가루지!</p>
+  {% endif %}
+  <hr>
+
+  {% for menu in menus %}
+
+    <p>{{ forloop.counter }}번째 도는중....</p>
+    {% if forloop.first %}
+    <p> {{ menu }} + 고춧가루 </p>
+    {% else %}
+    <p>{{ menu }}</p>
+    {% endif %}
+  {% endfor %}
+
+
+  <h2>3. length filter 활용</h2>
+  {% for message in messages  %}
+    {% if message|length > 5 %}
+    <p>{{message}}, 글자가 너무 길어요.</p>
+    {% else %}
+    <p>{{message}}, {{message|length }} </p>  
+    {% endif %}
+  {% endfor %}
+
+  <hr>
+  <h2>4. lorem ipsum</h2>
+  {% lorem %}
+
+  <hr>
+  {% lorem 3 w %}  
+  <hr>
+  {% lorem 3 w random %}
+  <hr>
+  {% lorem 2 p %}
+
+  <hr>
+  <h2>5. 글자 수 제한(truncate)</h2>
+  <p>{{my_sentence|truncatewords:3}}</p> {% comment %} 단어 단위로 제한 {% endcomment %}
+  <p>{{my_sentence|truncatechars:3}}</p> {% comment %} 문자 단위로 제한 (3번째는 포함X)  {% endcomment %}
+  <p>{{my_sentence|truncatechars:10}}</p> {% comment %} 문자 단위로 제한 (10번째는 포함X)  {% endcomment %}
+
+  <h3>6. 글자 관련 필터</h3>
+  <p>{{ 'abc'|length }}</p>
+  <p>{{ 'abc'|lower }}</p>
+  <p>{{ 'abc'|upper }}</p>
+  <p>{{my_sentence|title}}</p>
+  <p>{{ 'abc def'|capfirst}}</p>
+  <p>{{ menus|random }}</p>
+  <hr>
+
+  <h2>7. 연산</h2>
+  <p>{{ 4|add:6 }}</p>
+  <hr>
+
+  <h2>8. 날짜표현</h2>
+  <p> {{ datetimenow }} </p>
+  <p> {% now "DATE_TIME_FORMAT" %}</p>
+  <p>{% now "DATE_FORMAT" %}</p>
+  <p>{% now "SHORT_DATE_FORMAT" %}</p>
+  
+  <h2>9. 기타</h2>
+  <p>{{ "google.com"|urlize }}</p>
+</body>
+</html>
