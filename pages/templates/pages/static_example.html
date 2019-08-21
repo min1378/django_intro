@@ -1,4 +1,4 @@
-{% load static %}
+
 
 
 <!DOCTYPE html>
@@ -11,7 +11,14 @@
   <link rel="stylesheet" href="{% static 'style_sheets/example.css' %}">
 </head>
 <body>
-  <h1>STATIC 파일 실습</h1>
-  <img src="{% static 'images/IU.jpg' %}" alt="IU1">
+
 </body>
 </html>
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>STATIC 파일 실습</h1>
+  <img src="{% static 'images/IU.jpg' %}" alt="IU1">
+{% endblock  %}

@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'pages',
     'utilities',
     # Third party apps
-    
+
 
     # Django apps
     'django.contrib.admin',
@@ -61,7 +61,7 @@ ROOT_URLCONF = 'django_intro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'django_intro', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
