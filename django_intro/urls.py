@@ -14,28 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from pages import views
+from django.urls import path, include
+
 
 # www.ssafy.com/login => 404 not found
 # www.ssafy.com/index => views.index
 urlpatterns = [
     #path('사용자가 접속하는 경로')
-    path('index/', views.index),
+    path('pages/', include('pages.urls')),
     path('admin/', admin.site.urls),
-    path('introduce/', views.introduce),
-    path('dinner/<str:name>', views.dinner),
-    path('image/', views.image),
-    path('greeting/<str:name>', views.greeting),
-    path('times/<int:num1>:<int:num2>', views.times),
-    path('template_language/', views.template_language),
-    path('info/', views.info),
-    path('student/<str:name>:<int:age>', views.student),
-    path('isbirthday/', views.isbirthday),
-    path('lotto/', views.lotto),
-    path('search/', views.search),
-    path('result/', views.result),
-    path('lotto_pick/', views.lotto_pick),
-    path('lotto_result/', views.lotto_result),
-    path('static_example/', views.static_example),
+    path('utilities/', include('utilities.urls')),
 ]

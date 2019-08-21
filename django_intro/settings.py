@@ -33,8 +33,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Local apps
     'pages',
+    'utilities',
     # Third party apps
-
+    
 
     # Django apps
     'django.contrib.admin',
